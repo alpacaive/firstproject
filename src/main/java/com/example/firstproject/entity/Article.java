@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 // 컨트롤러에 DTO를 엔티티로 변환하기위해 form객체의 toEntity()라는 메서드를 호출해서 반환값을 Article타입 article 엔티티에 저장
 // 그러기 위해 Article 클래스와 toEntity() 메서드가 필요해서 만드는 과정.
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Entity // 엔티티 선언
 public class Article {
