@@ -36,7 +36,7 @@ public class ArticleController {
         Article saved = articleRepository.save(article); // article 엔티티를 저장해 saved 객체에 반환
         log.info(saved.toString());
         //System.out.println(saved.toString());
-        return "";
+        return "redirect:/articles/" + saved.getId(); // 리다이렉트를 작성할 위치, 클라이언트의 요청을 받아 새로운 URL 주소로 재요청하라고 지시하는 것
     }
     @GetMapping("/articles/{id}") //데이터 조회 요청 접수
     public String show(@PathVariable Long id, Model model) { // 매개변수로 id 받아오기, 모델 등록 : MVC 패턴에 따라 조회한 데이터를 뷰 페이지에 사용하기 위해
