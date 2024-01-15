@@ -9,6 +9,7 @@ import lombok.ToString;
 public class ArticleForm {
     // 이 파일이 폼 데이터를 받아 올 그릇, 즉 DTO가 된다.
     // 입력 폼에서 제목과 내용을 전송할 예정이니 DTO에도 필드 2개가 필요.
+    private Long id; // id 필드 추가
     private String title; // 제목을 받을 필드
     private String content; // 내용을 받을 필드
 
@@ -27,6 +28,6 @@ public class ArticleForm {
     }*/
 
     public Article toEntity() { // 엔티티에 Article 클래스의 생성자 형식에 맞게 작성하면 된다.
-        return new Article(null, title, content);
-    }
+        return new Article(id, title, content);
+    } // null -> id로 수정
 }
