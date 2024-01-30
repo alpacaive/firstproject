@@ -1,8 +1,10 @@
 package com.example.firstproject.controller;
 
 import com.example.firstproject.dto.ArticleForm;
+import com.example.firstproject.dto.CommentDto;
 import com.example.firstproject.entity.Article;
 import com.example.firstproject.repository.ArticleRepository;
+import com.example.firstproject.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class ArticleController {
     @Autowired // 이를 컨트롤러 필드에 붙이면 스프링 부트가 만들어 놓은 객체를 가져와 주입해준다 : 의존성 주입(DI : Dependecy Injection)
     private ArticleRepository articleRepository; //articleRepository 객체 선언
     // 자바에서는 new를 사용해 구현체를 만들어야했지만, 스프링 부트에서는 객체를 만들지 않아도 부트가 알아서 객체를 만들어준다.
+    @Autowired
+    private CommentService commentService; // 서비스 객체 주입
     @GetMapping("/articles/new") // URL 요청 접수, localhost:8080/articles/new에 뷰 페이지를 반환할 수 있도록
     public String newArticleForm() {
         return "articles/new"; //반환값은 뷰페이지 이름
@@ -45,8 +49,10 @@ public class ArticleController {
         log.info("id = " + id); // id를 잘 받았는지 확인하는 로그 찍기
         // 1. id를 조회해 데이터 가져오기
         Article articleEntity = articleRepository.findById(id).orElse(null); //해당 id값이 없으면 null을 반환하라는 뜻
+        List<CommentDto> commentDtos = commentService.comments(id);
         // 2. 모델에 데이터 등록하기
         model.addAttribute("article", articleEntity); //article이라는 이름으로 articleEntity 객체 등록
+        model.addAttribute("commentDtos", commentDtos); // 댓글 목록 모델에 등록
         // 3. 뷰 페이지 반환하기
         return "articles/show"; //show.mustache 반환
     }
