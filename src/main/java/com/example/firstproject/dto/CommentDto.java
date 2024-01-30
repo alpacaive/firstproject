@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString // 모든 필드를 출력할 수 있는 toString 메서드 자동 생성
 public class CommentDto { // Comment(댓글 엔티티)를 담을 그릇
     private Long id; // 댓글의 id
-    @JsonProperty("article_id") // JSON 데이터의 키 이름과 이를 받아 저장하는 DTO에 선언된 필드의 변수명이 다를 경우, 해당 키와 변수가 자동으로 매핑
     private Long articleId; // 댓글의 부모 id
     private String nickname; // 댓글 작성자
     private String body; // 댓글 본문
